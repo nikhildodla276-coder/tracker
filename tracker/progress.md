@@ -13,3 +13,7 @@ static/ — CSS, fonts, icons that style those pages
 venv/ — isolated Python environment for this project
 .env — will store Groq API key privately
 app.py — the brain of the app, all Flask code goes here
+
+## Next Session
+-Learn what "from flask import Flask" and "app = Flask(__name__)" actually means
+-Write first route - home page
