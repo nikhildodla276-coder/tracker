@@ -10,5 +10,9 @@ def home():
 def log():
     return " Daily log page - coming soon."
 
+@app.route("/report")
+def report():
+    return "Weekly report - coming soon."
+
 if __name__ == "__main__":
     app.run(debug=True)
