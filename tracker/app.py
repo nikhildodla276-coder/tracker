@@ -14,5 +14,9 @@ def log():
 def report():
     return "Weekly report - coming soon."
 
+@app.route("/weekly")
+def weekly():
+    return "Weekly summary - coming soon."
+
 if __name__ == "__main__":
     app.run(debug=True)
