@@ -6,7 +6,7 @@ app.config["SECRET_KEY"] = "tracker-dev-key"
 
 @app.route("/")
 def home():
-    return "Tracker is running."
+    return render_template("index.html")
 
 @app.route("/log")
 def log():
