@@ -6,3 +6,19 @@ body {
     background-color:#0f0f0f;
     color: #ffffff;
 }
+
+h1 {
+    color: #00ff88;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+nav a {
+    color: #00ff88;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
