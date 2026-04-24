@@ -28,3 +28,10 @@ p {
     font-size: 1 rem;
     margin-bottom: 20px;
 }
+
+nav {
+    margin-top: 20px;
+    padding: 10px 0;
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+}
