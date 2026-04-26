@@ -15,5 +15,4 @@ venv/ — isolated Python environment for this project
 app.py — the brain of the app, all Flask code goes here
 
 ## Next Session
--Learn what "from flask import Flask" and "app = Flask(__name__)" actually means
--Write first route - home page
+database.py - SQLite setup for daily logs
