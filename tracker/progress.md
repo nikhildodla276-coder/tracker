@@ -16,3 +16,6 @@ app.py — the brain of the app, all Flask code goes here
 
 ## Next Session
 database.py - SQLite setup for daily logs
+
+
+## Goal: Complete tracker project within 3 weeks of exam completion
