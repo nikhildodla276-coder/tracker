@@ -15,7 +15,8 @@ venv/ — isolated Python environment for this project
 app.py — the brain of the app, all Flask code goes here
 
 ## Next Session
-database.py - SQLite setup for daily logs
+database.py - SQLite setup for daily logs.
+database.py will have: get_db_connected(), init_db(), logs table with id, date, task_name, rating, notes.
 
 
 ## Goal: Complete tracker project within 3 weeks of exam completion
