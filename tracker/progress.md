@@ -17,6 +17,6 @@ app.py — the brain of the app, all Flask code goes here
 ## Next Session
 database.py - SQLite setup for daily logs.
 database.py will have: get_db_connected(), init_db(), logs table with id, date, task_name, rating, notes.
-
+Flask routes to build: /log (POST), /report (GET), /weekly (GET)
 
 ## Goal: Complete tracker project within 3 weeks of exam completion
