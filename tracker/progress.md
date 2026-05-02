@@ -19,5 +19,6 @@ database.py - SQLite setup for daily logs.
 database.py will have: get_db_connected(), init_db(), logs table with id, date, task_name, rating, notes.
 Flask routes to build: /log (POST), /report (GET), /weekly (GET).
 SQLite stores data in a single .db file, no server needed.
+logs table columns: id, date, task_name, rating, notes
 
 ## Goal: Complete tracker project within 3 weeks of exam completion
