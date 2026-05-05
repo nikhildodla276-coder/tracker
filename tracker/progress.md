@@ -21,6 +21,7 @@ Flask routes to build: /log (POST), /report (GET), /weekly (GET).
 SQLite stores data in a single .db file, no server needed.
 logs table columns: id, date, task_name, rating, notes
 init_db() creates tables if they don't already exist.
-init_db() creates tables if they don't already exist.
+Flask route /log will accept POST request with form data.
+rating input will be validated: must be integer between 1-5
 
 ## Goal: Complete tracker project within 3 weeks of exam completion
