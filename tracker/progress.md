@@ -26,5 +26,6 @@ rating input will be validated: must be integer between 1-5.
 /report route will fetch all logs from database and display.
 Groq API will receive weekly log data and return AI analysis.
 reminder table columns: id, title, due_date, done.
+Flask templates will use Jinja2 to render dynamic data.
 
 ## Goal: Complete tracker project within 3 weeks of exam completion
