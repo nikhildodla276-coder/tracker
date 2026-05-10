@@ -27,5 +27,6 @@ rating input will be validated: must be integer between 1-5.
 Groq API will receive weekly log data and return AI analysis.
 reminder table columns: id, title, due_date, done.
 Flask templates will use Jinja2 to render dynamic data.
+log.html will have a form with 8 task inputs and notes field.
 
 ## Goal: Complete tracker project within 3 weeks of exam completion
