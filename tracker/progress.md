@@ -29,5 +29,6 @@ reminder table columns: id, title, due_date, done.
 Flask templates will use Jinja2 to render dynamic data.
 log.html will have a form with 8 task inputs and notes field.
 report.html will display logs in a table format.
+weekly.html will display Groq AI analysis as formatted text.
 
 ## Goal: Complete tracker project within 3 weeks of exam completion
