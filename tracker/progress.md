@@ -31,5 +31,6 @@ log.html will have a form with 8 task inputs and notes field.
 report.html will display logs in a table format.
 weekly.html will display Groq AI analysis as formatted text.
 .env file will store GROQ_API_KEY securely.
+python-dotenv will load .env variable into Flask app.
 
 ## Goal: Complete tracker project within 3 weeks of exam completion
