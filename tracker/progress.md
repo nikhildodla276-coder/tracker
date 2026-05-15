@@ -33,5 +33,6 @@ weekly.html will display Groq AI analysis as formatted text.
 .env file will store GROQ_API_KEY securely.
 python-dotenv will load .env variable into Flask app.
 pylint will be run on all .py files before final commit.
+README.md will include project purpose, stack, how to run.
 
 ## Goal: Complete tracker project within 3 weeks of exam completion
