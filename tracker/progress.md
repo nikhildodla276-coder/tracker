@@ -34,5 +34,6 @@ weekly.html will display Groq AI analysis as formatted text.
 python-dotenv will load .env variable into Flask app.
 pylint will be run on all .py files before final commit.
 README.md will include project purpose, stack, how to run.
+racker.db will be added to .gitignore.
 
 ## Goal: Complete tracker project within 3 weeks of exam completion
