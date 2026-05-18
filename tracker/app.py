@@ -1,9 +1,12 @@
 from flask import Flask, render_template
+from database import init_db, get_db_connection
 
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "tracker-dev-key"
 app.config["DEBUG"] = True
+
+init_db()
 
 @app.route("/")
 def home():
