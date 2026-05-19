@@ -14,7 +14,7 @@ def home():
 
 @app.route("/log")
 def log():
-    return " Daily log page - coming soon."
+    return render_template("log.html")
 
 @app.route("/report")
 def report():

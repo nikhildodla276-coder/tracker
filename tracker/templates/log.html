@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Logs</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Daily Log</h1>
+        <form method="POST">
+        <div class="task">
+            <label>Gita Reading</label>
+            <input type="number" name="gita_reading_rating" min="1" max="5" required>
+            <textarea name="gita_reading_notes" placeholder="Notes..."></textarea>
+        </div>
+        <div class="task">
+            <label>Health & Nutritions</label>
+            <input type="number" name="health_rating" min="1" max="5" required>
+            <textarea name="health_notes" placeholder="Notes..."></textarea>
+        </div>
+        <div>
+            <label>Project work</label>
+            <input type="number" name="project_rating" min="1" max="5" required>
+            <textarea name="project_notes" placeholder="Notes..."></textarea>
+        </div>
+        <div>
+            <label>Physical Exercise</label>
+            <input type="number" name="exercise_rating" min="1" max="5" required>
+            <textarea name="exercise_notes" placeholder="Notes..."></textarea>
+        </div>
+        <div>
+            <label>English Practice</label>
+            <input type="number" name="english_rating" min="1" max="5" required>
+            <textarea name="english_notes" placeholder="Notes..."></textarea>
+        </div>
+        <div>
+            <label>No Distractions</label>
+            <input type="number" name="distraction_rating" min="1" max="5" required>
+            <textarea name="distractions_notes" placeholder="Notes..."></textarea>
+        </div>
+        <div>
+            <label>Mindful Response</label>
+            <input type="number" name="mindful_rating" min="1" max="5" required>
+            <textarea name="mindful_notes" placeholder="Notes..."></textarea>
+        </div>
+        <div>
+            <label>Daily Reflection</label>
+            <input type="number" name="reflection_rating" min="1" max="5" required>
+            <textarea name="reflection_notes" placeholder="Notes..."></textarea>
+        </div>
+        <button type="submit">Submit Log</button>
+        </form>
+    </div>
+</body>
+</html>
