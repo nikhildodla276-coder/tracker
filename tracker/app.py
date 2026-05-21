@@ -39,6 +39,34 @@ def log():
             INSERT INTO logs (date, task_name, rating, notes)
             VALUES (?, ?, ?, ?)
         """, (today, "Gita Reading", gita_rating, gita_notes))
+        cursor.execute("""
+            INSERT INTO logs (date, task_name, rating, notes)
+            VALUES (?, ?, ?, ?)
+        """, (today, "Health & Nutrition ", health_rating, health_notes))
+        cursor.execute("""
+            INSERT INTO logs (date, task_name, rating, notes)
+            VALUES (?, ?, ?, ?)
+        """, (today, "Project Work", project_rating, project_notes))
+        cursor.execute("""
+            INSERT INTO logs (date, task_name, rating, notes)
+            VALUES (?, ?, ?, ?)
+        """, (today, "Physical Exercise", exercise_rating, exercise_notes))
+        cursor.execute("""
+            INSERT INTO logs (date, task_name, rating, notes)
+            VALUES (?, ?, ?, ?)
+        """, (today, "English Practice", english_rating, english_notes))
+        cursor.execute("""
+            INSERT INTO logs (date, task_name, rating, notes)
+            VALUES (?, ?, ?, ?)
+        """, (today, "NO Distraction", distraction_rating, distractions_notes))
+        cursor.execute("""
+            INSERT INTO logs (date, task_name, rating, notes)
+            VALUES (?, ?, ?, ?)
+        """, (today, "Mindful Response", mindful_rating, mindful_notes))
+        cursor.execute("""
+            INSERT INTO logs (date, task_name, rating, notes)
+            VALUES (?, ?, ?, ?)
+        """, (today, "Daily Reflection", reflection_rating, reflection_notes))
         conn.commit()
         conn.close()
     return render_template("log.html")
