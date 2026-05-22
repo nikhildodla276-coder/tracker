@@ -73,7 +73,10 @@ def log():
 
 @app.route("/report")
 def report():
-    return "Weekly report - coming soon."
+    conn = get_db_connection()
+    logs = conn.execute("SELECT * FROM logs").fetchall()
+    conn.close()
+    return render_template("report.html", logs=logs)
 
 @app.route("/weekly")
 def weekly():
