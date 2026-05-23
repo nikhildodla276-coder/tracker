@@ -1,6 +1,11 @@
-from datetime import date
+from datetime import date, datetime
+import groq
 from flask import Flask, render_template, request
 from database import init_db, get_db_connection
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -71,6 +76,7 @@ def log():
         conn.close()
     return render_template("log.html")
 
+
 @app.route("/report")
 def report():
     conn = get_db_connection()
@@ -78,9 +84,69 @@ def report():
     conn.close()
     return render_template("report.html", logs=logs)
 
+
+def generate_summaries():
+    conn = get_db_connection()
+    logs = conn.execute("SELECT * FROM logs ORDER BY date ASC").fetchall()
+
+    weeks = {}
+    for log in logs:
+        d = datetime.strptime(log["date"], "%Y-%m-%d")
+        week_label = d.strftime("%Y-W%W")
+        if week_label not in weeks:
+            weeks[week_label] = []
+        weeks[week_label].append(log)
+
+    existing = conn.execute("SELECT period_label FROM summaries").fetchall()
+    existing_labels = [row["period_label"] for row in existing]
+
+    for week_label, week_logs in weeks.items():
+        if week_label in existing_labels:
+            continue
+        summary_lines = []
+        for log in week_logs:
+            line = f"{log['date']} | {log['task_name']} | Rating: {log['rating']} | Notes: {log['notes']}"
+            summary_lines.append(line)
+        summary_text = "\n".join(summary_lines)
+
+        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        conn.execute(
+            "INSERT INTO summaries (period_type, period_label, summary_text, created_at) VALUES (?, ?, ?, ?)",
+            ("weekly", week_label, summary_text, now)
+        )
+    conn.commit()
+    conn.close()
+
 @app.route("/weekly")
 def weekly():
-    return "Weekly summary - coming soon."
+    generate_summaries()
+    conn = get_db_connection()
+    summaries = conn.execute("SELECT * FROM summaries ORDER BY period_label ASC").fetchall()
+    conn.close()
+
+    all_summaries_text = ""
+    for s in summaries:
+        all_summaries_text += f"\n{s['period_label']}:\n{s['summary_text']}\n"
+
+    client = groq.Groq(api_key=os.getenv("GROQ_API_KEY"))
+    prompt = f"""You are a personal performance coach. Below is a user's daily performance log summarised by week from day 1 till today.
+
+{all_summaries_text}
+
+Analyse this data and provide:
+1. Overall performance trends
+2. Tasks where performance is consistently poor
+3. Specific actionable suggestions to improve
+4. Patterns you notice across weeks"""
+    
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    analysis = response.choices[0].message.content
+    return render_template("weekly.html", analysis=analysis)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

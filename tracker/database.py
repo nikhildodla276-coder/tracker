@@ -18,8 +18,18 @@ def init_db():
                    notes TEXT
                    )
                 """)
+
+    cursor.execute("""
+                   CREATE TABLE IF NOT EXISTS summaries (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   period_type TEXT NOT NULL,
+                   period_label TEXT NOT NULL,
+                   summar_text TEXT NOT NULL,
+                   created_at TEXT NOT NULL
+                   )
+                """)
     conn.commit()
-    conn.close
+    conn.close()
 
 if __name__ == "__main__":
     init_db()
