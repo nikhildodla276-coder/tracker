@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 from database import init_db, get_db_connection
 from dotenv import load_dotenv
 import os
+import markdown
 
 load_dotenv()
 
@@ -144,7 +145,7 @@ Analyse this data and provide:
         model="llama-3.3-70b-versatile",
         messages=[{"role": "user", "content": prompt}]
     )
-    analysis = response.choices[0].message.content
+    analysis = markdown.markdown(response.choices[0].message.content)
     return render_template("weekly.html", analysis=analysis)
 
 

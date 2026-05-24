@@ -24,7 +24,7 @@ def init_db():
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
                    period_type TEXT NOT NULL,
                    period_label TEXT NOT NULL,
-                   summar_text TEXT NOT NULL,
+                   summary_text TEXT NOT NULL,
                    created_at TEXT NOT NULL
                    )
                 """)
