@@ -28,6 +28,17 @@ def init_db():
                    created_at TEXT NOT NULL
                    )
                 """)
+    
+
+    cursor.execute("""
+                    CREATE TABLE IF NOT EXISTS chat_history (
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   role TEXT NOT NULL,
+                   content TEXT NOT NULL,
+                   created_at TEXT NOT NULL
+                   )
+                """)
+
     conn.commit()
     conn.close()
 
