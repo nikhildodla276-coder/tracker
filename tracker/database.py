@@ -1,10 +1,14 @@
+""""Database setup and connection management for tracker."""
+
 import sqlite3
 
+"""Open and return a database connection with Row factory."""
 def get_db_connection():
     conn= sqlite3.connect("tracker.db")
     conn.row_factory = sqlite3.Row
     return conn
 
+"""Initialize database and create tables if they don't exist."""
 def init_db():
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -28,7 +32,7 @@ def init_db():
                    created_at TEXT NOT NULL
                    )
                 """)
-    
+
 
     cursor.execute("""
                     CREATE TABLE IF NOT EXISTS chat_history (

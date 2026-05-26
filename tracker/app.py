@@ -1,10 +1,12 @@
+"""Daily Performance Tracker application"""
+
+import os
 from datetime import date, datetime
+from dotenv import load_dotenv
 import groq
 from flask import Flask, render_template, request
-from database import init_db, get_db_connection
-from dotenv import load_dotenv
-import os
 import markdown
+from database import init_db, get_db_connection
 
 load_dotenv()
 
@@ -85,7 +87,6 @@ def report():
     conn.close()
     return render_template("report.html", logs=logs)
 
-
 def generate_summaries():
     conn = get_db_connection()
     logs = conn.execute("SELECT * FROM logs ORDER BY date ASC").fetchall()
@@ -139,7 +140,6 @@ Analyse this data and provide:
 2. Tasks where performance is consistently poor
 3. Specific actionable suggestions to improve
 4. Patterns you notice across weeks"""
-    
 
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
@@ -159,14 +159,14 @@ def chat():
     for s in summaries:
         all_summaries_text += f"\n{s['period_label']}:\n{s['summary_text']}\n"
     
-    messages = [{"role": "system", "content": f"""You are a personal performance coach and domain expert. 
+    messages = [{"role": "system", "content": f"""You are a personal performance coach and domain expert.
 You have access to the user's complete performance history:
 {all_summaries_text}
 When answering, combine the user's personal data with deep domain knowledge in philosophy, biology, psychology etc."""}]
-    
+
     for h in history:
         messages.append({"role": h["role"], "content": h["content"]})
-    
+
     messages.append({"role": "user", "content": user_message})
 
 
@@ -176,7 +176,7 @@ When answering, combine the user's personal data with deep domain knowledge in p
         messages=messages
     )
     assistant_message = response.choices[0].message.content
-    
+
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     conn.execute(
         "INSERT INTO chat_history (role, content, created_at) VALUES (?, ?, ?)",
@@ -188,7 +188,7 @@ When answering, combine the user's personal data with deep domain knowledge in p
     )
     conn.commit()
     conn.close()
-    
+
     assistant_message = markdown.markdown(assistant_message)
     return {"response": assistant_message}
 
