@@ -148,6 +148,50 @@ Analyse this data and provide:
     analysis = markdown.markdown(response.choices[0].message.content)
     return render_template("weekly.html", analysis=analysis)
 
+@app.route("/chat", methods=["POST"])
+def chat():
+    user_message = request.form["message"]
+    conn = get_db_connection()
+    summaries = conn.execute("SELECT * FROM summaries ORDER BY period_label ASC").fetchall()
+    history = conn.execute("SELECT * FROM chat_history ORDER BY created_at ASC").fetchall()
+
+    all_summaries_text = ""
+    for s in summaries:
+        all_summaries_text += f"\n{s['period_label']}:\n{s['summary_text']}\n"
+    
+    messages = [{"role": "system", "content": f"""You are a personal performance coach and domain expert. 
+You have access to the user's complete performance history:
+{all_summaries_text}
+When answering, combine the user's personal data with deep domain knowledge in philosophy, biology, psychology etc."""}]
+    
+    for h in history:
+        messages.append({"role": h["role"], "content": h["content"]})
+    
+    messages.append({"role": "user", "content": user_message})
+
+
+    client = groq.Groq(api_key=os.getenv("GROQ_API_KEY"))
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=messages
+    )
+    assistant_message = response.choices[0].message.content
+    
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    conn.execute(
+        "INSERT INTO chat_history (role, content, created_at) VALUES (?, ?, ?)",
+        ("user", user_message, now)
+    )
+    conn.execute(
+        "INSERT INTO chat_history (role, content, created_at) VALUES (?, ?, ?)",
+        ("assistant", assistant_message, now)
+    )
+    conn.commit()
+    conn.close()
+    
+    assistant_message = markdown.markdown(assistant_message)
+    return {"response": assistant_message}
+
 
 if __name__ == "__main__":
     app.run(debug=True)

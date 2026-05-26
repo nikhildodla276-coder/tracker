@@ -11,6 +11,42 @@
         <div class="analysis">
             {{analysis | safe }}
         </div>
+        <div class="chat-container">
+            <h2>Ask Your Performance Coach</h2>
+            <div class="chat-history" id="chat-history"></div>
+            <div class="chat-input">
+                <input type="text" id="user-input" placeholder="Ask about your performance...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <script>
+            async function sendMessage() {
+                const input = document.getElementById("user-input");
+                const message = input.value.trim();
+                if (!message) return;
+
+                const chatHistory = document.getElementById("chat-history");
+                chatHistory.innerHTML += `<div class="user-message">${message}</div>`;
+                input.value = "";
+
+                const formData = new FormData();
+                formData.append("message", message);
+
+                const response = await fetch("/chat", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+                chatHistory.innerHTML += `<div class="assistant-message">${data.response}</div>`;
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }
+
+            document.getElementById("user-input").addEventListener("keypress", function(e) {
+                if (e.key === "Enter") sendMessage();
+            });
+        </script>
     </div>
 </body>
 </html>
