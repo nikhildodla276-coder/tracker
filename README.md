@@ -1,46 +1,62 @@
-Tracker
+# Daily Performance Tracker
 
-A Python tool that logs, monitors, and visualizes daily task execution metrics to keep your workflow clean.
+A Flask web app that tracks daily performance across 8 fixed tasks, generates AI-powered weekly analysis using Groq LLM, and keeps you accountable with a clean rating system.
 
-What It Does
+## What It Does
 
-Accepts user task input via CLI
+- Displays 8 fixed daily tasks every night for rating
+- Accepts a score of 1–5 per task along with optional notes
+- Stores all entries in a local SQLite database
+- Supports one-time task reminders (non-rated)
+- Sends all weekly data to Groq LLM API for AI-generated performance analysis
+- Displays the AI analysis summary inside the app
 
-Validates and processes input fields
+## Tech Stack
 
-Saves tasks to a local data file (SQLite/JSON)
+| Tool | Purpose |
+|------|---------|
+| Python 3 | Core language |
+| Flask | Web framework and routing |
+| SQLite | Local database for storing daily ratings |
+| Groq API | LLM for weekly AI performance analysis |
+| python-dotenv | Secure API key management |
+| HTML/CSS | Frontend UI |
 
-Generates colorful console tables to view progress
+## Project Status
 
-Tech Stack
+Complete. Tested with real daily tracking data. Tasks, ratings, and AI analysis fully functional.
 
-ToolPurposePython 3Core languageSQLite3/JSONLocal data persistence layerTabulate/RichVisual CLI layout engine python-dotenvSecure local environment paths
+## Setup and Usage
 
-Project Status
+### 1. Clone the repository
 
-Complete. Tested across local development iterations. Pylint score: 10/10
-
-Setup and Usage
-
-1. Clone the repository
-
+```bash
 git clone https://github.com/nikhildodla276-coder/tracker.git
 cd tracker
+```
 
-2. Create virtual environment and install dependencies
+### 2. Create virtual environment and install dependencies
 
+```bash
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+```
 
-3. Create your .env file
+### 3. Create your .env file
 
-LOCAL_DB_PATH=data/tracker.db
+```
+GROQ_API_KEY=your_api_key_here
+```
 
-4. Run the tracker tool
+### 4. Run the app
 
-python tracker.py --add "Task description here"
+```bash
+python app.py
+```
 
-Author
+Then open `http://localhost:5000` in your browser.
+
+## Author
 
 Nikhil Dodla — BTech CSE AIML, Kalinga University
