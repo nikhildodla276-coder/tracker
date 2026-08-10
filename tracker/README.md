@@ -30,3 +30,21 @@ A Flask web app that tracks daily performance across 8 tasks, stores data in SQL
 - `templates/` — HTML pages
 - `static/` — CSS styling
 - `tracker.db` — SQLite database (auto-created)
+
+## 3. Directory Structure & Architecture
+
+```text
+tracker/
+├── app.py              # Main Flask application entry point & routes
+├── database.py         # SQLite connection setup and schema initialization
+├── .env                # Environment variables (GROQ_API_KEY, FLASK_SECRET)
+├── .gitignore          # Excludes venv/, .env, __pycache__, and *.db
+├── templates/          # Jinja2 HTML templates
+│   ├── index.html      # Daily dashboard & task completion toggles
+│   ├── log.html        # Evening performance logger & rating entry
+│   └── report.html     # Weekly AI-generated performance breakdown
+└── static/             # Static UI assets
+    ├── css/
+    │   └── style.css   # Custom CSS styling
+    └── js/
+        └── main.js     # Client-side dynamic interactivity
